@@ -14,3 +14,14 @@ exprset.symbol <- exprset.symbol %>% arrange(mean) %>%
   distinct(symbol,.keep_all = T) %>% select(symbol:GSM1052620) # 依据symbol分组，依据mean排序，，之后再删除重复symbol
 dim(exprset.symbol) # 查看数据维度
 exprset.symbol$symbol %>% table() %>% table() %>% plot(main = "筛选之后") # 查看是否还有重复的symbol
+
+
+# 将gene symbol转换为首字母大写，其余小写的格式
+id <- exprset.symbol$symbol %>% {paste(substr(.,1,1),tolower(substr(.,2,nchar(.))),sep = "")}
+exprset.symbol <- mutate(exprset.symbol,symbol = id)
+# 这里还有一种更为简便的方法，将gene symbol转换为首字母大写，其余小写的格式
+# library(stringr)
+# str_to_title(exprset.symbol$symbol)
+# 将symbol设置为行名
+rownames(exprset.symbol) <- exprset.symbol$symbol
+exprset.symbol <- exprset.symbol[,-1]
