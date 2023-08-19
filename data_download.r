@@ -6,7 +6,8 @@
 
 #####数据下载#####
 if(!require(GEOquery)) BiocManager::install("GEOquery") # 安装包
-package.version("GEOquery") # 查看版本
+# package.version("GEOquery") # 查看版本
+packageVersion()# 查看版本
 help(package = "GEOquery") # 查看GEOquery中的函数
 library(GEOquery) # 加载包
 library(tidyverse)
