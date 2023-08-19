@@ -12,6 +12,7 @@ exprset.symbol <- exprset.symbol[,c(8,2:7)]
 exprset.symbol <- mutate(exprset.symbol,mean = rowMeans(exprset.symbol[2:7])) 
 exprset.symbol <- exprset.symbol %>% arrange(mean) %>% 
   distinct(symbol,.keep_all = T) %>% select(symbol:GSM1052620) # 依据symbol分组，依据mean排序，，之后再删除重复symbol
+# select() may occur error you should use add exprset.symbol<-dplyr::select(exprset.symbol,symbol:GSM1052620)
 dim(exprset.symbol) # 查看数据维度
 exprset.symbol$symbol %>% table() %>% table() %>% plot(main = "筛选之后") # 查看是否还有重复的symbol
 
